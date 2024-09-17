@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function App() {
+const App = () => {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    // Fetch data from the Flask API
-    axios.get('/api/hello')
-      .then(response => {
+    const fetchMessage = async () => {
+      try {
+        const response = await axios.get('/api/hello');
         setMessage(response.data.message);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error("There was an error fetching data from the API!", error);
-      });
+      }
+    };
+
+    fetchMessage();
   }, []);
 
   return (
