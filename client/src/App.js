@@ -7,7 +7,7 @@ const App = () => {
   useEffect(() => {
     const fetchMessage = async () => {
       try {
-        const response = await axios.get('/api/hello');
+        const response = await axios.get('/api/ec2');
         setMessage(response.data.message);
       } catch (error) {
         console.error("There was an error fetching data from the API!", error);
