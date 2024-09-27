@@ -34,12 +34,13 @@ const App = () => {
             <th>State</th>
             <th>Name</th>
             <th>Public IP</th>
-            <th>Private IP</th>
+            <th>Elastic IP</th>
           </tr>
         </thead>
         <tbody>
           {instances.map((instance) => (
             <tr key={instance.InstanceId}>
+              <td>{instance.InstanceId}</td>
               <td>{instance.State}</td>
               <td>{instance.InstanceName}</td>
               <td>{instance.PublicIpAddress}</td>
