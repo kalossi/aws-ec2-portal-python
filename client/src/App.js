@@ -7,8 +7,9 @@ const App = () => {
   useEffect(() => {
     const fetchInstances = async () => {
       try {
-        const response = await axios.get('/api/ec2/');
-        setInstances(response.data.instances || []);
+        const response = await axios.get('http://localhost:5000/api/ec2');
+        console.log("API Response:", response.data);
+        setInstances(response.data || []);
       } catch (error) {
         console.error("There was an error fetching data from the API!", error);
       }
@@ -17,16 +18,37 @@ const App = () => {
     fetchInstances();
   }, []);
 
-  return (
-    <div className="App">
-    {instances.map((instance, index) => (
-        <div key={index}>
-          <p>{instance}</p>
-          <div style={{ marginBottom: '1rem' }}></div>
-        </div>
-      ))}
+  console.log(instances);
+
+  return !instances || instances.length === 0 ? (
+    <div>
+      <h1>No instances available.</h1>
+    </div>
+  ) : (
+    <div>
+      <h1>Instances:</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Instance ID</th>
+            <th>State</th>
+            <th>Name</th>
+            <th>Public IP</th>
+            <th>Private IP</th>
+          </tr>
+        </thead>
+        <tbody>
+          {instances.map((instance) => (
+            <tr key={instance.InstanceId}>
+              <td>{instance.State}</td>
+              <td>{instance.InstanceName}</td>
+              <td>{instance.PublicIpAddress}</td>
+              <td>{instance.PrivateIpAddress}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
-}
-
+};
 export default App;

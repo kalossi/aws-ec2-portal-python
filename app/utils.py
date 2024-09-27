@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 session = boto3.Session(region_name='eu-north-1')
-print(f"Region: {session.region_name}")
 client = session.client(
     'ec2',
     aws_access_key_id=os.getenv('AWS_SDK_KEY_ID'),
@@ -29,5 +28,4 @@ def fetch_ec2_instances():
                 'PublicIpAddress': instance.get('PublicIpAddress', 'N/A'),
                 'PrivateIpAddress': instance.get('PrivateIpAddress', 'N/A')
             })
-    print(instances)
     return instances

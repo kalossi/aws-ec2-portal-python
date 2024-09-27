@@ -8,7 +8,8 @@ main = Blueprint('main', __name__)
 def ec2_api():
     try:
         ec2_instances = fetch_ec2_instances()
-        return jsonify(ec2_instances), 200  # Return the fetched instances and HTTP 200 OK status
+        print(f"fetched instances on server: \n",  ec2_instances, flush=True)
+        return ec2_instances
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

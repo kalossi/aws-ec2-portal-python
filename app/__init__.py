@@ -3,7 +3,7 @@ from flask_cors import CORS
 
 def create_app():
     app = Flask(__name__)
-    CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+    CORS(app)
 
     # Import the routes from routes.py
     from .routes import main
@@ -15,4 +15,4 @@ def create_app():
 
 if __name__ == 'main':
     app = create_app()
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=False)
