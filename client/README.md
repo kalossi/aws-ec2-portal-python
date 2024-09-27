@@ -1,14 +1,13 @@
-# AWS EC2 utilty using Flask and React
-## Pre requisities
-Establish virtual environment
+# The Front end client using react
+## Prerequisites
+Create a new React project for the client
 ```
-source venv/Scripts/activate
+npx create-react-app client
+cd client
 ```
-Install Python  packages
 ```
-pip install flask boto3 python-dotenv flask_cors 
+npm install axios
 ```
-Start React project for client
 ```
-mkdir client && cd client
+npm start
 ```
