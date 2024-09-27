@@ -3,7 +3,7 @@ import boto3
 import os
 import boto3.session
 from dotenv import load_dotenv
-from flask import json, request, Response
+from flask import json, Response
 
 load_dotenv()
 
