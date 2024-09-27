@@ -8,17 +8,22 @@ const App = () => {
     const fetchInstances = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/ec2');
-        console.log("API Response:", response.data);
+        // console.log("API Response:", response.data);
         setInstances(response.data || []);
       } catch (error) {
         console.error("There was an error fetching data from the API!", error);
       }
     };
 
+    const eventSource = new EventSource('http://localhost:5000/api/ec2');
+    eventSource.onmessage = (event) => {
+      // console.log(typeof JSON.parse(event.data));
+      setInstances(JSON.parse(event.data) || []);
+    }
     fetchInstances();
   }, []);
 
-  console.log(instances);
+  // console.log(instances);
 
   return !instances || instances.length === 0 ? (
     <div>

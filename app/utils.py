@@ -1,7 +1,9 @@
+import time
 import boto3
 import os
 import boto3.session
 from dotenv import load_dotenv
+from flask import json, request, Response
 
 load_dotenv()
 
@@ -29,3 +31,12 @@ def fetch_ec2_instances():
                 'PrivateIpAddress': instance.get('PrivateIpAddress', 'N/A')
             })
     return instances
+
+def stream_ec2_instances():
+    def event_stream():
+        while True:
+            instances = fetch_ec2_instances()
+            data = json.dumps(instances)
+            yield f"data: {data}\n\n"
+            time.sleep(15)
+    return Response(event_stream(), mimetype="text/event-stream")
