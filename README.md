@@ -1,4 +1,4 @@
-TODO# AWS EC2 utilty using Flask and React
+## TODO AWS EC2 utilty using Flask and React
 ## Pre requisities
 Establish virtual environment
 ```
